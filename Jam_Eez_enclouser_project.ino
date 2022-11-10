@@ -1,12 +1,11 @@
 //LED Variables
 const int ledcoin = 13;
-const int buttonCoin = 5;
-
 const int ledToken1 = 12;
-const int buttonToken1 = 6;
-
 const int ledToken2 = 11  ;
-const int buttonToken2 = 7;
+
+//podiums where the coins and tokens go
+const int buttonCoin = 5;
+const int buttonToken = 6;
 
 
 //Servo variables
@@ -19,6 +18,7 @@ const int buttonCerby = 2;
 //Charon
 Servo charonMove;
 const int buttonCharon = 3;
+bool boolcharon = false
 
 //Good Ending Wall
 Servo goodEnd;
@@ -49,14 +49,22 @@ if (digitalRead(buttonCerby) == HIGH){
 }
 
 //Charon movement
-    if (digitalRead(buttonCharon) == HIGH){
+
+if (digitalRead(buttonCharon) == HIGH){
+  boolcharon = TRUE; 
+}
+  if (digitalRead(buttonCoin) == HIGH){
   charonMove.write(135);
 } else {
   charonMove.write(0);
 }
 
 //Good end movement
-    if (digitalRead(buttonGoodEnd) == HIGH){
+  
+if (digitalRead(buttonGoodEnd) == HIGH){
+  boolGoodEnd = TRUE;
+}
+  if (digitalRead(buttonToken) == HIGH){ 
   goodEnd.write(135);
 } else {
   goodEnd.write(0);
