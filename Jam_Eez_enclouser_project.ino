@@ -1,4 +1,4 @@
-//LED Variables
+  //LED Variables
 const int ledcoin = 13;
 const int ledToken1 = 12;
 const int ledToken2 = 11  ;
@@ -9,6 +9,7 @@ const int ledToken2 = 11  ;
 //Cerberus
 Servo cerbytail;
 const int buttonCerby = 2;
+int pos = 0; 
 
 //Charon
 Servo charonMove;
@@ -42,25 +43,32 @@ cerbytail.attach(8);
 pinMode(buttonCerby, INPUT);
 
 //charon moving out of the way
-charonMove.attach(9);
+charonMove.attach(10);
 pinMode(buttonCharon, INPUT);
 pinMode(buttonCoin, INPUT);
 
 
 //good ending wall moving
-goodEndMove.attach(10);
+goodEndMove.attach(9);
   pinMode(buttonGoodEnd, INPUT);
   pinMode(buttonToken, INPUT);
+
 }
 //-----------------------------------------------------
 void loop() {
 
 //Cereberus tail movement
-if (digitalRead(buttonCerby) == HIGH){
-  cerbytail.write(135);
-} else {
-  cerbytail.write(45);
-}
+  for (pos = 45; pos <= 135; pos += 1) { 
+    // in steps of 1 degree
+    cerbytail.write(pos);              
+    delay(5);                       
+  }
+  for (pos = 135; pos >= 45; pos -= 1) { 
+    cerbytail.write(pos);              
+    delay(5);                       
+  }
+
+
 
 //Charon movement
 buttonCharonState = digitalRead(buttonCharon);
@@ -81,8 +89,8 @@ if (digitalRead(buttonCoin) == HIGH){
 }
 
 if (boolcharon && boolcoin){
-  Serial.println("charon moves");
-  charonMove.write(135);
+  Serial.println("the end");
+  charonMove.write(180);
 } else {
   charonMove.write(0);
 }
@@ -105,11 +113,13 @@ if (digitalRead(buttonToken) == HIGH){
 }
 }
 
-if (boolGoodEnd && boolToken){
-  Serial.println("orpheus and Eurydice stay together");
-  goodEndMove.write(135);
+if (boolGoodEnd && boolToken == true){
+   goodEndMove.write(135);
+ Serial.println("the end");
 } else {
   goodEndMove.write(0);
 }
-
+lastButtonGoodEndState == buttonGoodEndState;
+lastButtonTokenState == buttonTokenState;
         }
+        
