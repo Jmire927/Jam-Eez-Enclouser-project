@@ -1,7 +1,3 @@
-  //LED Variables
-const int ledcoin = 13;
-const int ledToken1 = 12;
-const int ledToken2 = 11  ;
 
 //Servo variables
 #include <Servo.h>;
