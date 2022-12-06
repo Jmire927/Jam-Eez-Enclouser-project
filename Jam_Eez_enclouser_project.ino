@@ -1,10 +1,12 @@
-
 //Servo variables
 #include <Servo.h>;
 
 //Cerberus
 Servo cerbytail;
 const int buttonCerby = 2;
+int buttonCerbyState = 0;
+int lastButtonCerbyState = 0;
+bool boolcerby = false;
 int pos = 0; 
 
 //Charon
@@ -54,6 +56,13 @@ goodEndMove.attach(9);
 void loop() {
 
 //Cereberus tail movement
+  buttonCerbyState = digitalRead(buttonCerby);
+  
+ if (buttonCerbyState != lastButtonCerbyState){
+if (digitalRead(buttonCerby) == HIGH){
+  boolcerby = true; 
+  
+  if (boolcerby == true);
   for (pos = 45; pos <= 135; pos += 1) { 
     // in steps of 1 degree
     cerbytail.write(pos);              
@@ -117,5 +126,7 @@ if (boolGoodEnd && boolToken == true){
 }
 lastButtonGoodEndState == buttonGoodEndState;
 lastButtonTokenState == buttonTokenState;
+lastButtonCerbyState == buttonCerbyState;  
         }
-        
+ }
+}
